@@ -126,6 +126,25 @@ function mostrarResultados() {
     resultadosDiv.appendChild(table);
 }
 
+function leerMatrizCostos(filas, columnas) {
+    matrizCostos = [];
+    const matrizDiv = document.getElementById("matriz");
+    const table = matrizDiv.querySelector("table");
+
+    for (let i = 0; i < filas; i++) {
+        const row = table.rows[i];
+        const rowData = [];
+
+        for (let j = 0; j < columnas; j++) {
+            const cell = row.cells[j];
+            const input = cell.querySelector("input");
+            rowData.push(parseInt(input.value));
+        }
+
+        matrizCostos.push(rowData);
+    }
+}
+
 // Función para iniciar los cálculos
 function calcular() {
     const filas = parseInt(document.getElementById("filas").value);
