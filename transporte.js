@@ -1,5 +1,6 @@
 // Define variables globales para la matriz, oferta y demanda
 let matrizCostos = [];
+let valoresInputs = [];
 let oferta = [];
 let demanda = [];
 
@@ -23,7 +24,6 @@ function generarMatrizYInputs() {
             const cell = document.createElement("td");
             const input = document.createElement("input");
             input.type = "number";
-            input.value = "0"; // Establecer un valor inicial aquí
             input.placeholder = `Celda (${i + 1}, ${j + 1})`;
             cell.appendChild(input);
             row.appendChild(cell);
@@ -161,7 +161,7 @@ function mostrarResultados() {
     const gananciaTotal = calcularGanancia(valoresInputs, asignaciones);
 
     const resultadosDiv = document.getElementById("resultados");
-    resultadosDiv.innerHTML = "<h2>Resultados:</h2>";
+    resultadosDiv.innerHTML = "<h2>Asignaciones:</h2>";
 
     // Crear una tabla para mostrar las asignaciones
     const table = document.createElement("table");
@@ -175,11 +175,30 @@ function mostrarResultados() {
         table.appendChild(row);
     }
     resultadosDiv.appendChild(table);
-
-    // Mostrar la ganancia total
+            // Mostrar la ganancia total
     const gananciaTotalDiv = document.createElement("div");
     gananciaTotalDiv.textContent = "Ganancia Total: " + gananciaTotal;
     resultadosDiv.appendChild(gananciaTotalDiv);
+}
+
+// Función para leer la matriz de costos
+function leerMatrizCostos(filas, columnas) {
+    matrizCostos = [];
+    const matrizDiv = document.getElementById("matriz");
+    const table = matrizDiv.querySelector("table");
+
+    for (let i = 0; i < filas; i++) {
+        const row = table.rows[i];
+        const rowData = [];
+
+        for (let j = 0; j < columnas; j++) {
+            const cell = row.cells[j];
+            const input = cell.querySelector("input");
+            rowData.push(parseInt(input.value));
+        }
+
+        matrizCostos.push(rowData);
+    }
 }
 
 // Función para iniciar los cálculos
