@@ -25,8 +25,34 @@ function generarMatriz() {
             cell.appendChild(input);
             row.appendChild(cell);
         }
+        
+        // Agregar celda adicional para los requerimientos
+        const requerimientoCell = document.createElement("td");
+        const requerimientoInput = document.createElement("input");
+        requerimientoInput.type = "number";
+        requerimientoInput.placeholder = "Requerimiento";
+        requerimientoCell.appendChild(requerimientoInput);
+        row.appendChild(requerimientoCell);
+
         table.appendChild(row);
     }
+    
+    // Agregar fila adicional para los requerimientos
+    const requerimientosRow = document.createElement("tr");
+    for (let j = 0; j < columnas; j++) {
+        const cell = document.createElement("td");
+        const requerimientoInput = document.createElement("input");
+        requerimientoInput.type = "number";
+        requerimientoInput.placeholder = "Requerimiento";
+        cell.appendChild(requerimientoInput);
+        requerimientosRow.appendChild(cell);
+    }
+    
+    // Celda adicional vacía para la esquina inferior derecha
+    const esquinaCell = document.createElement("td");
+    requerimientosRow.appendChild(esquinaCell);
+    
+    table.appendChild(requerimientosRow);
     matrizDiv.appendChild(table);
 }
 
