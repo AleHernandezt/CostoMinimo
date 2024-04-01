@@ -4,46 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Algoritmo de Transporte</title>
-    <style>
-        table {
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Algoritmo de Transporte</h1>
-    <p>Ingresa el tamaño de la matriz y los valores:</p>
-
-    <!-- Campos de entrada para el tamaño de la matriz -->
-    <label for="filas">Número de fuentes:</label>
-    <input type="number" id="filas">
-    <br>
-    <label for="columnas">Número de destinos:</label>
-    <input type="number" id="columnas">
-    <br>
-
-    <!-- Botón para generar la matriz -->
-    <button onclick="generarMatrizYInputs()">Generar Matriz</button>
-
-    <!-- Mostrar la matriz -->
-    <div id="matriz"></div>
-
-    <div id="oferta-demanda">
-        <h2>Oferta y Demanda:</h2>
-        <div id="oferta-inputs"></div>
-        <div id="demanda-inputs"></div>
+    <div class="container">
+        <h1>Algoritmo de Transporte</h1>
+        <p>Ingresa el tamaño de la matriz y los valores:</p>
+        
+        <!-- Campos de entrada para el tamaño de la matriz -->
+        <label for="filas">Número de fuentes:</label>
+        <input type="number" id="filas" class="number-input">
+        <br>
+        <label for="columnas">Número de destinos:</label>
+        <input type="number" id="columnas" class="number-input">
+        <br>
+        
+        <!-- Botón para generar la matriz -->
+        <button onclick="generarMatrizYInputs()">Generar Matriz</button>
+        
+        <!-- Mostrar la matriz -->
+        <div id="matriz"></div>
+        
+        <div id="oferta-demanda">
+            <h2>Oferta y Demanda:</h2>
+            <div id="oferta-inputs"></div>
+            <div id="demanda-inputs"></div>
+        </div>
+        <!-- Botón para calcular -->
+        <button onclick="calcular()">Calcular</button>
+        
+        <!-- Mostrar los resultados -->
+        <div id="resultados"></div>
     </div>
-    
-    <!-- Botón para calcular -->
-    <button onclick="calcular()">Calcular</button>
-
-    <!-- Mostrar los resultados -->
-    <div id="resultados"></div>
 
     <!-- Incluye tu archivo JavaScript -->
     <script src="transporte.js"></script>

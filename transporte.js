@@ -28,8 +28,34 @@ function generarMatrizYInputs() {
             cell.appendChild(input);
             row.appendChild(cell);
         }
+        
+        // Agregar celda adicional para los requerimientos
+        const requerimientoCell = document.createElement("td");
+        const requerimientoInput = document.createElement("input");
+        requerimientoInput.type = "number";
+        requerimientoInput.placeholder = "Requerimiento";
+        requerimientoCell.appendChild(requerimientoInput);
+        row.appendChild(requerimientoCell);
+
         table.appendChild(row);
     }
+    
+    // Agregar fila adicional para los requerimientos
+    const requerimientosRow = document.createElement("tr");
+    for (let j = 0; j < columnas; j++) {
+        const cell = document.createElement("td");
+        const requerimientoInput = document.createElement("input");
+        requerimientoInput.type = "number";
+        requerimientoInput.placeholder = "Requerimiento";
+        cell.appendChild(requerimientoInput);
+        requerimientosRow.appendChild(cell);
+    }
+    
+    // Celda adicional vacía para la esquina inferior derecha
+    const esquinaCell = document.createElement("td");
+    requerimientosRow.appendChild(esquinaCell);
+    
+    table.appendChild(requerimientosRow);
     matrizDiv.appendChild(table);
 
     // Generar campos de entrada para oferta y demanda
@@ -182,6 +208,25 @@ function mostrarResultados() {
 }
 
 // Función para leer la matriz de costos
+function leerMatrizCostos(filas, columnas) {
+    matrizCostos = [];
+    const matrizDiv = document.getElementById("matriz");
+    const table = matrizDiv.querySelector("table");
+
+    for (let i = 0; i < filas; i++) {
+        const row = table.rows[i];
+        const rowData = [];
+
+        for (let j = 0; j < columnas; j++) {
+            const cell = row.cells[j];
+            const input = cell.querySelector("input");
+            rowData.push(parseInt(input.value));
+        }
+
+        matrizCostos.push(rowData);
+    }
+}
+
 function leerMatrizCostos(filas, columnas) {
     matrizCostos = [];
     const matrizDiv = document.getElementById("matriz");
