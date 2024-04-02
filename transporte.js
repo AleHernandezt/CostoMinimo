@@ -8,7 +8,6 @@ let demanda = [];
 let matriz = [];
 
 // Función para generar la matriz
-// Función para generar la matriz
 function generarMatrizYInputs() {
     const filas = parseInt(document.getElementById("filas").value);
     const columnas = parseInt(document.getElementById("columnas").value);
@@ -29,25 +28,27 @@ function generarMatrizYInputs() {
             row.appendChild(cell);
         }
         
-        // Agregar celda adicional para los requerimientos
+        // Agregar columna a la derecha para la oferta
         const requerimientoCell = document.createElement("td");
         const requerimientoInput = document.createElement("input");
         requerimientoInput.type = "number";
-        requerimientoInput.placeholder = "Requerimiento";
+        requerimientoInput.id = `oferta-${i}`;
+        requerimientoInput.placeholder = `Oferta de la fuente ${i + 1}`;
         requerimientoCell.appendChild(requerimientoInput);
         row.appendChild(requerimientoCell);
 
         table.appendChild(row);
     }
     
-    // Agregar fila adicional para los requerimientos
+    // Agregar fila para demanda de los requerimientos
     const requerimientosRow = document.createElement("tr");
     for (let j = 0; j < columnas; j++) {
         const cell = document.createElement("td");
-        const requerimientoInput = document.createElement("input");
-        requerimientoInput.type = "number";
-        requerimientoInput.placeholder = "Requerimiento";
-        cell.appendChild(requerimientoInput);
+        const requerimientoInputDemanda = document.createElement("input");
+        requerimientoInputDemanda.type = "number";
+        requerimientoInputDemanda.id = `demanda-${j}`;
+        requerimientoInputDemanda.placeholder = `Demanda de la fuente ${j + 1}`;
+        cell.appendChild(requerimientoInputDemanda);
         requerimientosRow.appendChild(cell);
     }
     
@@ -57,29 +58,6 @@ function generarMatrizYInputs() {
     
     table.appendChild(requerimientosRow);
     matrizDiv.appendChild(table);
-
-    // Generar campos de entrada para oferta y demanda
-    const ofertaInputsDiv = document.getElementById("oferta-inputs");
-    const demandaInputsDiv = document.getElementById("demanda-inputs");
-
-    ofertaInputsDiv.innerHTML = "";
-    demandaInputsDiv.innerHTML = "";
-
-    for (let i = 0; i < columnas; i++) {
-        // Crear campo de entrada para la oferta
-        const ofertaInput = document.createElement("input");
-        ofertaInput.type = "number";
-        ofertaInput.placeholder = `Oferta para la fuente ${i + 1}`;
-        ofertaInput.id = `oferta-${i}`;
-        ofertaInputsDiv.appendChild(ofertaInput);
-
-        // Crear campo de entrada para la demanda
-        const demandaInput = document.createElement("input");
-        demandaInput.type = "number";
-        demandaInput.placeholder = `Demanda para el destino ${i + 1}`;
-        demandaInput.id = `demanda-${i}`;
-        demandaInputsDiv.appendChild(demandaInput);
-    }
 }
 
 // Función para leer las cantidades de oferta y demanda
@@ -88,11 +66,11 @@ function leerOfertaDemanda(columnas) {
     demanda = [];
 
     for (let i = 0; i < columnas; i++) {
-        const ofertaInput = document.getElementById(`oferta-${i}`);
-        oferta.push(parseInt(ofertaInput.value));
+        const requerimientoInput = document.getElementById(`oferta-${i}`);
+        oferta.push(parseInt(requerimientoInput.value));
 
-        const demandaInput = document.getElementById(`demanda-${i}`);
-        demanda.push(parseInt(demandaInput.value));
+        const demandaInputDemanda = document.getElementById(`demanda-${i}`);
+        demanda.push(parseInt(demandaInputDemanda.value));
     }
 }
 
@@ -134,34 +112,6 @@ function asignarCantidades(matrizCostos, oferta, demanda) {
     }
 
     return asignaciones;
-}
-
-// Función para leer la matriz de costos
-
-function leerMatrizCostos(filas, columnas) {
-    matrizCostos = [];
-    valoresInputs = [];
-    const matrizDiv = document.getElementById("matriz");
-    const table = matrizDiv.querySelector("table");
-
-    for (let i = 0; i < filas; i++) {
-        const row = table.rows[i];
-        const rowData = [];
-        const filaInputs = []; 
-
-        for (let j = 0; j < columnas; j++) {
-            const cell = row.cells[j];
-            const input = cell.querySelector("input");
-            const valorNumerico = input.value;
-            rowData.push(valorNumerico);
-            filaInputs.push(valorNumerico);
-        }
-
-        matrizCostos.push(rowData);
-        valoresInputs.push(filaInputs);
-        console.log(valoresInputs)
-    }
-    return {matrizCostos, valoresInputs}
 }
 
 function calcularGanancia(valoresInputs, asignaciones) {
@@ -210,39 +160,26 @@ function mostrarResultados() {
 // Función para leer la matriz de costos
 function leerMatrizCostos(filas, columnas) {
     matrizCostos = [];
+    valoresInputs = [];
     const matrizDiv = document.getElementById("matriz");
     const table = matrizDiv.querySelector("table");
 
     for (let i = 0; i < filas; i++) {
         const row = table.rows[i];
         const rowData = [];
+        const filaInputs = []; 
 
         for (let j = 0; j < columnas; j++) {
             const cell = row.cells[j];
             const input = cell.querySelector("input");
-            rowData.push(parseInt(input.value));
+            const valorNumerico = parseInt(input.value);
+            rowData.push(valorNumerico);
+            filaInputs.push(valorNumerico);
         }
 
         matrizCostos.push(rowData);
-    }
-}
-
-function leerMatrizCostos(filas, columnas) {
-    matrizCostos = [];
-    const matrizDiv = document.getElementById("matriz");
-    const table = matrizDiv.querySelector("table");
-
-    for (let i = 0; i < filas; i++) {
-        const row = table.rows[i];
-        const rowData = [];
-
-        for (let j = 0; j < columnas; j++) {
-            const cell = row.cells[j];
-            const input = cell.querySelector("input");
-            rowData.push(parseInt(input.value));
-        }
-
-        matrizCostos.push(rowData);
+        valoresInputs.push(filaInputs);
+        console.log(matrizCostos, valoresInputs)
     }
 }
 

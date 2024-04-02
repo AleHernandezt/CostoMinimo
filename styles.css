@@ -56,4 +56,10 @@ h1 {
     margin-bottom: 1rem;
 }
 
+#resultados  {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
 
